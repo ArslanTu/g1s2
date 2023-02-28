@@ -1,0 +1,220 @@
+\newcommand{\MyName}{} % Add your name here
+\newcommand{\MyID}{} % Add your student ID here
+\newcommand{\MyEmail}{} % (optinal) Add your email here
+
+\documentclass[11pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm Design and Complexity Analysis S23 (3978)}
+\renewcommand\lstlistlistingname{Grad Algo S23}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{Algorithm Design and Complexity Analysis (3978) Spring 23}
+\newcommand\doctitle{Assignment 1}
+\newcommand\hwnumber{}                  % <-- homework number
+\newcommand\NetIDa{Name: \MyName}           % <-- NetID of person #1
+\newcommand\NetIDb{ID: \MyID}           % <-- NetID of person #2 (Comment this line out for problem sets)
+\newcommand\NetIDc{E-mail: \MyEmail} 
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\NetIDa}
+\lhead{\NetIDa\\\NetIDb\\\NetIDc}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+%\chead{\textbf{\Large Assignment 1~~~~~~}}
+\rhead{\course \\\doctitle ~\\}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\begin{document}
+
+\section*{Submission Instructions}
+
+\begin{itemize}
+	
+	\item The solution must be submitted as a PDF or image file to Blackboard by the deadline.
+	
+	\item All the solutions must be written in English.
+	
+	\item You must write your name in English and Chinese, your Student ID and your e-mail (optional) at the top of the first page. 
+
+	\item Later on, there will be a lot of mathematical formulas. Thus, you are recommended to use LaTex to write your solutions. Microsoft Word version 2016 and above also have a feature for converting a Tex-like script into a mathematical formula. 
+
+	\item If it is too troublesome to use LaTex, handwriting notes are always welcome. You can just write your solutions on paper and scan them using your phone camera. But, please make sure that you write them clearly; otherwise, it will be difficult to grade your submissions correctly. 
+
+	\item  There is no need to be too careful about English grammar and typos. It is acceptable as long as it is understandable. You may use some grammar-checking tools, like, Grammarly to help fix your English writing. 
+	
+	\item ChatGPT is not allowed. Please don’t use ChatGPT to solve your problems. It can be easily spotted because the writing is generally {\bf too perfect}. 
+
+	\item Should you have any questions regarding the assignment, please contact me via WeChat or by email at \url{LBundit+gradalgoS23@gmail.com}.
+
+\end{itemize}
+
+
+\section*{Academic Integrity Policy}
+
+\begin{enumerate}
+	\item All collaborations must be clearly indicated, e.g., discussed with student A. 
+	\item All outside sources including papers, textbook, lecture note or website must be cited properly. There is no restriction in reference format. 
+	\item Everything except definitions must be {\bf paraphrased}. You are supposed to write everything on your own. Please also try to write mathematical calculations on your own unless it does not seem possible to avoid copying the known calculations.
+	%
+	\item Any submission with {\bf $\ge 10\%$} verbatim copied from outside sources is also considered plagiarism.
+\end{enumerate}
+
+You will receive the most severe punishment for not abiding to the Academic Integrity Policy. Fail to do so, you will receive a zero score for the entire course, and the incident will be reported to the academic committee, which could end up in being expelled from the program. 
+
+
+\pagebreak
+
+\section*{Part I: Test Your Understanding  (30 points)}
+
+
+	\paragraph*{Question 1} [Chapter 1 Exercise 1 in \cite{KT05}]
+	
+	Decide whether you think the following statement is true or false. If it is true, give a short explanation. If it is false, give a counterexample.  
+
+	\medskip
+	
+	\emph{True or false? In every instance of the Stable Matching Problem, there is a stable matching containing a pair $(m, w)$ such that $m$ is ranked first on the  preference list of $w$ and $w$ is ranked first on the preference list of $m$.}
+
+	\medskip
+	
+	\noindent
+	{\bf Anwser: (Yes or No?)} ( 5 pt )\\
+	{\bf Explanation or Counter Example:} ( 10 pt )\\
+
+	\bigskip
+
+	\paragraph*{Question 2}[Chapter 1 Exercise 2 in \cite{KT05}] Decide whether you think the following statement is true or false. If it is  true, give a short explanation. If it is false, give a counterexample.
+	
+	\medskip
+	
+	\emph{True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of $w$ and $w$ is ranked first on the preference list of $m$. Then in  every stable matching $S$ for this instance, the pair $(m, w)$ belongs to $S$.}
+
+	\medskip
+
+	\noindent
+	{\bf Anwser: (Yes or No?)} ( 5 pt )\\
+	{\bf Explanation or Counter Example:} ( 10 pt )\\
+	
+	\bigskip
+
+\pagebreak
+
+\section*{Part II: Challenge Questions (70 points)}
+
+\paragraph*{Question 3 (30 pt)} [Revisit Materials omitted from class]
+
+In this question, we revisit the materials missing from the class. Our aim is to show that any stable matching output from Gale-Shapley algorithm is ``hospital-optimal''.
+
+To be formal, we say that a student $s$ is a {\em valid partner} for a hospital $h$ if there exists a stable matching in which $s$ is matched with $h$. If the student $s$ has the highest ranking among valid partner for the hospital $h$, then we say that $s$ is the {\em best valid partner} for the hospital $h$.
+
+Now consider the assignment in which each hospital is assigned with the best valid partner. We want to show that such an assignment forms a perfect matching. 
+
+\medskip
+
+\begin{proof}
+
+We proceed the proof by contradiction.
+Suppose such a hospital-optimal assignment is not a matching.
+Then there can be two possible. 
+
+\medskip
+
+\paragraph*{Question 3 (a) (10 pt)} Case 1: There exists a hospital that admits more than one students.
+{\em Argue that this case is not possible.}
+
+\medskip
+
+\paragraph*{Question 3 (b) (10 pt)} Case 2: There exists a student $s$ who is assigned to two different hospitals $h$ and $h'$. 
+
+Then there it means that there exist a stable matching $M$ that matches $s$ with $h$ and another stable matching $M'$ that matches $s$ to $h'$.  We may assume WLOG that $s$ prefers $h$ to $h$'. {\em Argue that one of the matching $M$ or $M'$ is not stable.}
+
+\medskip
+
+\paragraph*{Question 3 (c) (10 pt)} [Perfectness of Assignment] Argue that any hospital-optimal assignment is a perfect matching, i.e., every hospital admits at least one student, and every student is assigned to at least one hospital. 
+
+\medskip
+
+
+\paragraph*{Question 3 (d) (10 pt)} [Hospital-Optimal is Stable] Show that any hospital-optimal assignment is a stable-matching.
+
+\medskip
+
+\end{proof}
+
+
+\pagebreak
+
+\paragraph*{Question 4 (30pt)} [Chapter 1 Exercise 4 in \cite{KT05}]
+
+Gale and Shapley published their paper on the Stable Matching Problem  in 1962; but a version of their algorithm had already been in use for ten years by the National Resident Matching Program, for the problem of assigning medical residents to hospitals.
+
+Basically, the situation was the following. There were $m$ hospitals,  each with a certain number of available positions for hiring residents. There were $n$ medical students graduating in a given year, each interested in joining one of the hospitals. Each hospital had a ranking of the students  in order of preference, and each student had a ranking of the hospitals  in order of preference. We will assume that there were more students  graduating than there were slots available in the $m$ hospitals.
+
+The interest, naturally, was in finding a way of assigning each student  to at most one hospital, in such a way that all available positions in all  hospitals were filled. (Since we are assuming a surplus of students, there  would be some students who do not get assigned to any hospital.)  We say that an assignment of students to hospitals is {\em stable} if neither  of the following situations arises.
+
+\medskip
+\noindent{\sc First type of instability:} There are students $s$ and $s'$ and a hospital $h$, so that
+
+\begin{itemize}
+	\item $s$ is assigned to $h$, and  
+	\item $s'$ is assigned to no hospital, and 
+	\item $h$ prefers $s'$ to $s$.
+\end{itemize}
+
+\medskip
+\noindent{\sc Second type of instability:} There are students $s$ and $s'$, and hospitals $h$ and $h'$, so that 
+
+\begin{itemize}
+	\item $s$ is assigned to $h$, and
+	\item $s'$ is assigned to $h'$, and 
+	\item $h$ prefers $s'$ to $s$, and
+	\item $s'$ prefers $h$ to $h'$. 
+\end{itemize}
+
+So we basically have the Stable Matching Problem, except that (i)  hospitals generally want more than one resident, and (ii) there is a surplus  of medical students.
+
+Show that there is always a stable assignment of students to hospitals, and give an algorithm to find one. 
+
+\begin{thebibliography}{11}
+
+	\bibitem[KT06]{KT06}
+	Jon Kleinberg and Éva Tardos.
+	\newblock {\em Algorithm Design}: Pearson New International Edition (2006).
+	\newblock Pearson Education Limited Kindle Edition (2014). 
+	
+\end{thebibliography}
+
+
+\end{document}
